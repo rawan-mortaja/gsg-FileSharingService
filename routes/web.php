@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\FileController;
+use App\Models\File;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/', [FileController::class, 'index'])
+    ->name('file.index');
+Route::post('/upload', [FileController::class, 'upload'])
+    ->name('file.upload');
+Route::get('/file/{id}', [FileController::class, 'download'])
+    ->name('file.download');
