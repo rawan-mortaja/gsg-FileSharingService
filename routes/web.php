@@ -26,3 +26,5 @@ Route::post('/upload', [FileController::class, 'upload'])
     ->name('file.upload');
 Route::get('/file/{id}', [FileController::class, 'download'])
     ->name('file.download');
+Route::get('/view/{id}',  [FileController::class, 'view'])
+    ->name('file.view');

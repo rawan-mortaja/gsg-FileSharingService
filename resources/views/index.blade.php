@@ -25,7 +25,7 @@
                 {{ session('error') }}
             </div>
         @endif
-        <h1>File Sharing Service</h1>
+        <h2>File Sharing Service</h2>
         <form action="{{ route('file.upload') }}" method="post" enctype="multipart/form-data">
             @csrf
 
@@ -44,6 +44,7 @@
                         <tr>
                             <th>#</th>
                             <th>File Name</th>
+                            <th>View</th>
                             <th>Download</th>
                         </tr>
                     </thead>
@@ -53,7 +54,8 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $file->file_name }}</td>
-                                <td><a href="file.download/{{ $file->file_name }}" download>Download</td>
+                                <td><a href="view/{{ $file->id }}" target="_blank">View</a></td>
+                                <td><a href="file.view/{{ $file->file_name }}" download>Download</td>
                             </tr>
                         @endforeach
                     </tbody>

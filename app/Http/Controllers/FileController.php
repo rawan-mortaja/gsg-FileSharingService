@@ -42,4 +42,15 @@ class FileController extends Controller
 
         return Storage::download($file->file_path, $file->file_name);
     }
+
+    public function view($id)
+    {
+        $file = File::find($id);
+
+        if (!$file) {
+            return redirect()->back()->with('error', 'File not found!');
+        }
+
+        return view('view', compact('file'));
+    }
 }
