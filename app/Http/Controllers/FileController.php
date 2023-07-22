@@ -54,7 +54,17 @@ class FileController extends Controller
         return view('view', compact('file'));
     }
 
-    public function share($id){
+    public function share($id)
+{
+    $file = File::find($id);
 
+    if (!$file) {
+        return redirect()->back()->with('error', 'File not found!');
     }
+
+    $shareLink = url('/file/' . $file->id);
+
+    return view('share', compact('file', 'shareLink'));
+}
+
 }
