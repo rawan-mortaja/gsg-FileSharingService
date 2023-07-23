@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\URL;
 
 class FileController extends Controller
 {
@@ -54,17 +54,31 @@ class FileController extends Controller
         return view('view', compact('file'));
     }
 
+    //     public function share($id)
+    // {
+    //     $file = File::find($id);
+
+    //     if (!$file) {
+    //         return redirect()->back()->with('error', 'File not found!');
+    //     }
+
+    //     $shareLink = url('/file/' . $file->id);
+
+    //     return view('share', compact('file', 'shareLink'));
+    // }
+
+
+
     public function share($id)
-{
-    $file = File::find($id);
+    {
+        $file = File::find($id);
 
-    if (!$file) {
-        return redirect()->back()->with('error', 'File not found!');
+        if (!$file) {
+            return redirect()->back()->with('error', 'File not found!');
+        }
+
+        $shareLink = URL::signedRoute('file.download', ['id' => $file->id]);
+
+        return view('share', compact('file', 'shareLink'));
     }
-
-    $shareLink = url('/file/' . $file->id);
-
-    return view('share', compact('file', 'shareLink'));
-}
-
 }
