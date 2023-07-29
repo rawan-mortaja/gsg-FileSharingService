@@ -54,8 +54,6 @@ class FileController extends Controller
         return view('view', compact('file'));
     }
 
-
-
     public function share($id)
     {
         $file = File::find($id);

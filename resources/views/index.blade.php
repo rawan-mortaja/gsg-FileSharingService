@@ -45,7 +45,7 @@
                             <th>#</th>
                             <th>File Name</th>
                             <th>Share</th>
-                            <th>View</th>
+                            {{-- <th>View</th> --}}
                             <th>Download</th>
                         </tr>
                     </thead>
@@ -56,7 +56,7 @@
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $file->file_name }}</td>
                                 <td><a href="share/{{ $file->id }}" target="_blank">Share</a></td>
-                                <td><a href="view/{{ $file->id }}" target="_blank">View</a></td>
+                                {{-- <td><a href="view/{{ $file->id }}" target="_blank">View</a></td> --}}
                                 <td><a href="file.view/{{ $file->file_name }}" download>Download</a></td>
                             </tr>
                         @endforeach

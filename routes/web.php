@@ -29,4 +29,4 @@ Route::get('/file/{id}', [FileController::class, 'download'])
 Route::get('/view/{id}',  [FileController::class, 'view'])
     ->name('file.view');
 Route::get('/share/{id}' , [FileController::class , 'share'])
-    ->name('share');
+    ->name('file.share');
