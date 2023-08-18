@@ -10,6 +10,14 @@
     <title>File Sharing Service</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+    <style>
+        body {
+    background-image: url('background-image.jpg'); /* قم بتغيير اسم الملف إلى الصورة التي تريد استخدامها */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+    </style>
 </head>
 
 <body>
