@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class FileLink extends Model
 {
     use HasFactory;
+    protected $guarded = [];
     public function file()
     {
         return $this->belongsTo(File::class);

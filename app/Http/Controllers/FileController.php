@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\DownloadEvent;
 use App\Models\File;
+use App\Models\FileDownload;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 
 class FileController extends Controller
@@ -32,16 +35,6 @@ class FileController extends Controller
         return redirect()->route('file.index')->with('success', 'File uploaded successfully!');
     }
 
-    public function download($id)
-    {
-        $file = File::find($id);
-
-        if (!$file) {
-            return redirect()->back()->with('error', 'File not found!');
-        }
-
-        return Storage::download($file->file_path, $file->file_name);
-    }
 
     public function view($id)
     {
@@ -52,6 +45,36 @@ class FileController extends Controller
         }
 
         return view('view', compact('file'));
+    }
+
+    public function download($id)
+    {
+        // $file = File::find($id);
+
+        // if (!$file) {
+        //     return redirect()->back()->with('error', 'File not found!');
+        // }
+
+        $fileDownload = FileDownload::find($id);
+
+        if (!$fileDownload) {
+            return redirect('/')->with('error', 'File not found');
+        }
+
+        $fileDownload->increment('download_count');
+
+        $ip_address = request()->ip();
+        $user_agent = request()->header('User-Agent');
+        $country = $this->getCountryByIpAddress($ip_address);
+
+        event(new DownloadEvent($id, $ip_address, $user_agent, $country));
+
+        $filePath = 'uploads/' . $fileDownload->filename;
+        $downloadLink = Storage::url($filePath);
+
+        return redirect($downloadLink);
+
+        // return Storage::download($file->file_path, $file->file_name);
     }
 
     public function share($id)

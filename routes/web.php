@@ -24,9 +24,9 @@ Route::get('/', [FileController::class, 'index'])
     ->name('file.index');
 Route::post('/upload', [FileController::class, 'upload'])
     ->name('file.upload');
-Route::get('/file/{id}', [FileController::class, 'download'])
-    ->name('file.download');
 Route::get('/view/{id}',  [FileController::class, 'view'])
     ->name('file.view');
-Route::get('/share/{id}' , [FileController::class , 'share'])
+Route::get('/share/{id}', [FileController::class, 'share'])
     ->name('file.share');
+Route::get('/file/{id}', [FileController::class, 'download'])
+    ->name('file.download');
